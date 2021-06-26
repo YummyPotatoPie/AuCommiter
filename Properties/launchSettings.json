@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AuCommiter": {
+      "commandName": "Project",
+      "commandLineArgs": "time=1h -rep       =         hello"
+    }
+  }
+}
