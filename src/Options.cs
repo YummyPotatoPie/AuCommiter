@@ -4,34 +4,11 @@ namespace AuCommiter
 {
     internal class Options
     {
-        private int WorkTime = 3600;
-        private int CommitTime = 600;
-        private string CommitDirectory = Directory.GetCurrentDirectory();
-        private string CommitBranch = "master";
-        private string DefaultMessage = "Auto commit by AuCommiter: ";
-
-        public Options SetWorkTime(int workTime)
-        {
-            WorkTime = workTime;
-            return this;
-        }
-
-        public Options SetCommitTime(int commitTime)
-        {
-            CommitTime = commitTime;
-            return this;
-        }
-
-        public Options SetCommitDirectory(string commitDirectory)
-        {
-            CommitDirectory = commitDirectory;
-            return this;
-        }
-
-        public Options SetCommitBranch(string commitBranch)
-        {
-            CommitBranch = commitBranch;
-            return this;
-        }
+        public int WorkTime { get; set; } = 3600;
+        public int CommitTime { get; set; } = 600;
+        public string CommitDirectory { get; set; } = Directory.GetCurrentDirectory();
+        public string CommitBranch { get; set; }  = "master";
+        public string DefaultMessage { get; set; } = "Auto commit by AuCommiter: ";
+        public string GitDirectory { get; set; } = "C:\\Program Files\\Git\\cmd";
     }
 }

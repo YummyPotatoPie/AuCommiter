@@ -81,6 +81,17 @@ namespace AuCommiter
         private static string ReadValue(ref InputStream stream)
         {
             StringBuilder value = new();
+            if (stream.Peek() == '\'')
+            {
+                stream.Next();
+                while (!stream.Eof() && stream.Peek() != '\'')
+                {
+                    value.Append(stream.Peek());
+                    stream.Next();
+                }
+                stream.Next();
+                return value.ToString();
+            }
             while (!stream.Eof() && stream.Peek() != '-' && !char.IsWhiteSpace(stream.Peek()))
             {
                 value.Append(stream.Peek());
