@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AuCommiter
+namespace AuCommitter
 {
-    class Commiter
+    class Committer
     {
         static void Main(string[] args)
         {
@@ -36,13 +38,13 @@ namespace AuCommiter
                         options.CommitTime = Utilites.ParseTime(parsedOptions[key]);
                         break;
                     case "gd":
-                        if (Utilites.IsRepository(parsedOptions[key]))
+                        if (Utilites.IsGit(parsedOptions[key]))
                         {
                             options.CommitDirectory = parsedOptions[key];
                         }
                         else
                         {
-                            Console.WriteLine("Directory is not repository");
+                            Console.WriteLine("Directory is not Git folder");
                             return;
                         }
                         break;
@@ -69,15 +71,40 @@ namespace AuCommiter
                 }
             }
 
+            Execute(options);
         }
 
         static void Execute(Options options)
         {
-            int timeCounter = 0;
+            int timeCounter = 1;
+            int commitCount = 1;
+            Console.WriteLine("AuCommiter had been started");
             while (timeCounter <= options.WorkTime)
             {
+                if (timeCounter % options.CommitTime == 0)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Process process = new();
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.FileName = options.GitDirectory + "\\git.exe";
+                        process.StartInfo.Arguments = $"-C \"{options.CommitDirectory}\" add .";
+                        process.Start();
 
+                        process.StartInfo.Arguments = $"-C \"{options.CommitDirectory}\" commit -m \"{options.DefaultMessage + ((commitCount >> 14) ^ timeCounter)}\"";
+                        process.Start();
+
+                        Thread.Sleep(1000);
+                        timeCounter++;
+                    }
+                    Console.WriteLine($"Commited changes: {commitCount}");
+                    commitCount++;
+                }
+                Thread.Sleep(1000);
+                timeCounter++;
             }
+            Console.WriteLine("AuCommiter had been ended process");
         }
     }
 }

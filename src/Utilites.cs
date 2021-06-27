@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AuCommiter
+namespace AuCommitter
 {
     internal static class Utilites
     {
@@ -49,5 +49,7 @@ namespace AuCommiter
         }
 
         public static bool IsRepository(string path) => Directory.Exists(path) && Directory.Exists(path + "\\.git");
+
+        public static bool IsGit(string path) => Directory.Exists(path) && File.Exists(path + "\\git.exe");
     }
 }

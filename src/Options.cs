@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace AuCommiter
+namespace AuCommitter
 {
     internal class Options
     {

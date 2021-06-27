@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AuCommiter
+namespace AuCommitter
 {
     internal class InputStream
     {

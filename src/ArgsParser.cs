@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace AuCommiter
+namespace AuCommitter
 {
     internal static class ArgsParser
     {
